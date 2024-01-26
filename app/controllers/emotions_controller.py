@@ -4,7 +4,12 @@ class EmotionsController:
     def load_emotions(self, str):
         normalized_list = self.normalize_string(str)
         list_of_emotions = normalized_list.split('\n')
-        print(list_of_emotions)
+        
+        existing_emotions = Emotion.query.with_entities(Emotion.emotion).all()
+        existing_emotions = [emotion[0] for emotion in existing_emotions]
+        missing_in_db = [item for item in list_of_emotions if item not in existing_emotions]
+        
+        print(missing_in_db)
         
         return ""
     
