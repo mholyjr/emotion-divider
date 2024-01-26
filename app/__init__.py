@@ -25,7 +25,9 @@ def create_app():
     def index():
         if request.method == 'POST':
             inputData = request.form['input_text']
-            response = emotions_controller.load_emotions(inputData)
+            project = request.form['project']
+            response = emotions_controller.load_emotions(inputData, project)
+            print(project)
             return render_template('index.html', content=response)
         return render_template('index.html')
       
