@@ -15,12 +15,11 @@ def create_app():
 
     db.init_app(app)
     
+    # Migrations
     with app.app_context():
-        # Import your models here
         from app.models.emotion import Emotion
         
     migrate = Migrate(app, db)
-
 
     @app.route('/', methods=['GET', 'POST'])
     def index():
@@ -29,20 +28,6 @@ def create_app():
             response = openai_controller.call_openai_api(inputData)
             return render_template('index.html', content=response)
         return render_template('index.html')
-
-  
-    @app.route('/test_db')
-    def test_db():
-      try:
-        # Obtain a connection and execute a simple query
-        with db.engine.connect() as connection:
-            result = connection.execute(text("SELECT 1"))
-            for row in result:
-                print("Query result:", row)
-            return 'Database connection successful.'
-      except Exception as e:
-        # If an exception occurred, return the error
-        return f'Database connection failed: {e}'
-          
+      
     return app
 
