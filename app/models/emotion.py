@@ -1,4 +1,4 @@
-from .. import db
+from app.database import db
 
 class Emotion(db.Model):
     id = db.Column(db.Integer, primary_key=True)
