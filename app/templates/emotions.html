@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Emotion divider</title>
+  </head>
+  <body>
+    <h1>Emotions</h1>
+    <ul>
+        {% for emotion in emotions %}
+        <li>ID: {{ emotion.id }}, Emotion: {{ emotion.emotion }}, Project: {{ emotion.project }}, Sentiment: {{ emotion.sentiment }}</li>
+        {% endfor %}
+    </ul>
+  </body>
+</html>
