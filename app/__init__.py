@@ -31,7 +31,6 @@ def create_app():
       
     @app.route('/emotions')
     def list_emotions():
-        # Querying all records in the Emotion table
         emotions = Emotion.query.all()
         return render_template('emotions.html', emotions=emotions)
       
