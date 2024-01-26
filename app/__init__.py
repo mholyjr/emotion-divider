@@ -3,6 +3,7 @@ from app.controllers.openai_controller import OpenAIController
 from app.config import Config
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import text
+from flask_migrate import Migrate
 
 db = SQLAlchemy()
 
@@ -13,6 +14,13 @@ def create_app():
     app.config.from_object(Config)
 
     db.init_app(app)
+    
+    with app.app_context():
+        # Import your models here
+        from app.models.emotion import Emotion
+        
+    migrate = Migrate(app, db)
+
 
     @app.route('/', methods=['GET', 'POST'])
     def index():
